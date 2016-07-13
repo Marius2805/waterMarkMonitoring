@@ -99,4 +99,6 @@ $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
 
 $app->register(Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
 
+$app->withEloquent();
+
 return $app;

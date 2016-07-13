@@ -4,6 +4,7 @@ use App\General\EntityRepository;
 
 /**
  * Class MeasurementRepository
+ * @method Measurement getById(int $id) : Model
  * @package App\Services\Measurement
  */
 class MeasurementRepository extends EntityRepository
