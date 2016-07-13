@@ -26,7 +26,6 @@ class MeasurementController
         $this->repository = $repository ?: new MeasurementRepository();
     }
 
-
     public function create(Request $request)
     {
         $value = $request->json('value');
