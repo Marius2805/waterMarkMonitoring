@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Services\Measurement\Measurement;
 use App\Services\Measurement\MeasurementRepository;
 use Assert\Assertion;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
  * Class Measurement
  * @package App\Http\Controllers\API
  */
-class MeasurementController
+class MeasurementController extends Controller
 {
     /**
      * @var MeasurementRepository
@@ -29,7 +30,7 @@ class MeasurementController
     public function create(Request $request)
     {
         $value = $request->json('value');
-        Assertion::float($value);
+        Assertion::numeric($value);
 
         $measurement = new Measurement(['value' => $value]);
         $this->repository->save($measurement);

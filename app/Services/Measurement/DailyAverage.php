@@ -2,12 +2,13 @@
 namespace App\Services\Measurement;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\Support\Jsonable;
 
 /**
  * Class DailyAverage
  * @package App\Services\Measurement
  */
-class DailyAverage
+class DailyAverage implements Jsonable, \JsonSerializable
 {
     /**
      * @var Carbon
@@ -44,5 +45,24 @@ class DailyAverage
     public function getValue() : float
     {
         return $this->value;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->jsonSerialize());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'date'  => $this->date->format('Y-m-d'),
+            'value' => round($this->value, 2)
+        ];
     }
 }

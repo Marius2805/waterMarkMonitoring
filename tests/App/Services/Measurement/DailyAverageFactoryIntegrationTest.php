@@ -2,6 +2,7 @@
 namespace Tests\App\Services\Measurement;
 
 use App\Services\Measurement\DailyAverageFactory;
+use App\Services\Measurement\MeasurementRepository;
 use Carbon\Carbon;
 use Tests\App\General\IntegrationTest;
 
@@ -21,6 +22,7 @@ class DailyAverageFactoryIntegrationTest extends IntegrationTest
         parent::setUp();
 
         $this->factory = new DailyAverageFactory();
+        $this->deleteAll(new MeasurementRepository());
     }
 
     public function test_getAverages_CacheUsed()

@@ -1,9 +1,11 @@
 <?php
 namespace Tests\App\General;
 
+use App\General\EntityRepository;
 use App\Services\Measurement\Measurement;
 use App\Services\Measurement\MeasurementRepository;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -43,5 +45,17 @@ abstract class IntegrationTest extends TestCase
         $repository->save($measurement);
 
         return $measurement;
+    }
+
+    /**
+     * Deletes all entities of the repository
+     * @param EntityRepository $repository
+     */
+    protected function deleteAll(EntityRepository $repository)
+    {
+        foreach ($repository->all() as $entity) {
+            /** @var Model $entity */
+            $repository->delete($entity);
+        }
     }
 }

@@ -1,6 +1,7 @@
 <?php
-namespace App\Http\Controllers\API;
+namespace Tests\App\Http\Controllers\API;
 
+use App\Http\Controllers\API\MeasurementController;
 use App\Services\Measurement\Measurement;
 use App\Services\Measurement\MeasurementRepository;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class MeasurementControllerTest extends TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Value "<NULL>" is not a float.
+     * @expectedExceptionMessage Value "<NULL>" is not numeric.
      */
     public function test_create_valueMissing()
     {
@@ -53,7 +54,7 @@ class MeasurementControllerTest extends TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Value "noFloat" is not a float.
+     * @expectedExceptionMessage Value "noFloat" is not numeric.
      */
     public function test_create_valueNotFloat()
     {

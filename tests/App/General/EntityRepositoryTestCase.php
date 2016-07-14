@@ -26,7 +26,7 @@ abstract class EntityRepositoryTestCase extends IntegrationTest
 
         $this->repository = $this->getRepository();
         $this->entityClass = $this->getExpectedEntityClass();
-        $this->deleteAll();
+        $this->deleteAll($this->repository);
     }
 
     abstract protected function getRepository() : EntityRepository;
@@ -80,16 +80,5 @@ abstract class EntityRepositoryTestCase extends IntegrationTest
         $entity = $this->createEntity();
         $this->repository->delete($entity);
         $this->repository->getById($entity->getKey());
-    }
-
-    /**
-     * Deletes all entities of the repository
-     */
-    protected function deleteAll()
-    {
-        foreach ($this->repository->all() as $entity) {
-            /** @var Model $entity */
-            $this->repository->delete($entity);
-        }
     }
 }
