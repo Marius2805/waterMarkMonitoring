@@ -51,7 +51,11 @@ abstract class EntityRepositoryTestCase extends IntegrationTest
         $entity1 = $this->repository->getById($expected->getKey());
         $entity2 = $this->repository->getById($expected->getKey());
 
-        self::assertSame($entity1, $entity2);
+        if (!$this->repository->cacheEnabled()) {
+            self::assertNotSame($entity1, $entity2);
+        } else {
+            self::assertSame($entity1, $entity2);
+        }
     }
 
     /**

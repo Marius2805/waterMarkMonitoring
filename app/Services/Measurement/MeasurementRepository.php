@@ -12,6 +12,11 @@ use Carbon\Carbon;
 class MeasurementRepository extends EntityRepository
 {
     /**
+     * @var bool
+     */
+    protected $cacheEnabled = false;
+
+    /**
      * @return string
      */
     protected function getEntityClass() : string
@@ -19,6 +24,11 @@ class MeasurementRepository extends EntityRepository
         return Measurement::class;
     }
 
+    /**
+     * @param Carbon $day
+     * @return float
+     * @throws MeasurementNotFound
+     */
     public function getDailyAverage(Carbon $day) : float
     {
         $result = $this->getConnection()->connection()->table($this->getTable())->whereBetween('created_at', [clone $day->startOfDay(), clone $day->endOfDay()])->avg('value');

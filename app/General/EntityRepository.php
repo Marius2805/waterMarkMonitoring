@@ -20,6 +20,11 @@ abstract class EntityRepository
      */
     protected $entityClass;
 
+    /**
+     * @var bool
+     */
+    protected $cacheEnabled = true;
+
     public function __construct()
     {
         $this->entityClass = $this->getEntityClass();
@@ -40,17 +45,24 @@ abstract class EntityRepository
      */
     public function getById(int $id) : Model
     {
-        if (!isset(self::$cache[$this->getEntityClass()][$id])) {
-            $entity = call_user_func($this->entityClass . '::find', $id);
+        $entity = null;
 
-            if ($entity == null) {
-                throw new EntityNotFoundException($this->entityClass, $id);
+        if ($this->cacheEnabled) {
+            if (!isset(self::$cache[$this->getEntityClass()][$id])) {
+                $entity = call_user_func($this->entityClass . '::find', $id);
+                $this->addToCache($entity);
             }
 
-            $this->addToCache($entity);
+            return self::$cache[$this->getEntityClass()][$id];
+        } else {
+            $entity =  call_user_func($this->entityClass . '::find', $id);
         }
 
-        return self::$cache[$this->getEntityClass()][$id];
+        if ($entity == null) {
+            throw new EntityNotFoundException($this->entityClass, $id);
+        }
+
+        return $entity;
     }
 
     /**
@@ -59,7 +71,10 @@ abstract class EntityRepository
     public function save(Model $entity)
     {
         $entity->save();
-        $this->addToCache($entity);
+
+        if ($this->cacheEnabled) {
+            $this->addToCache($entity);
+        }
     }
 
     /**
@@ -67,8 +82,20 @@ abstract class EntityRepository
      */
     public function delete(Model $entity)
     {
-        $this->removeFromCache($entity);
+        if ($this->cacheEnabled) {
+            $this->removeFromCache($entity);
+        }
+
         $entity->delete();
+    }
+
+    /**
+     * Indicates if the cache for this repository is enabled
+     * @return bool
+     */
+    public function cacheEnabled() : bool
+    {
+        return $this->cacheEnabled;
     }
 
     /**
