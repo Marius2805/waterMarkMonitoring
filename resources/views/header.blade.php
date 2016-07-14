@@ -7,4 +7,8 @@
     <script language="javascript" type="text/javascript" src="/js/jquery-3.1.0.min.js"></script>
     <script language="javascript" type="text/javascript" src="/js/Chart.bundle.min.js"></script>
     <script language="javascript" type="text/javascript" src="/js/semantic.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/app.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/DailyAverage/DailyAverageController.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/LineChart/LineChart.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/app.js"></script>
 </head>
