@@ -31,7 +31,7 @@ class MeasurementRepository extends EntityRepository
      */
     public function getDailyAverage(Carbon $day) : float
     {
-        $result = $this->getConnection()->connection()->table($this->getTable())->whereBetween('created_at', [clone $day->startOfDay(), clone $day->endOfDay()])->avg('value');
+        $result = $this->getConnection()->table($this->getTable())->whereBetween('created_at', [clone $day->startOfDay(), clone $day->endOfDay()])->avg('value');
 
         if (is_null($result)) {
             throw new MeasurementNotFound('No measurements found at day "' . $day->startOfDay()->toDateString() . '".');

@@ -1,19 +1,10 @@
 <?php
 namespace Tests\App\General;
-use App\CustomerManagement\Animals\AnimalRepository;
-use App\CustomerManagement\Appointment\AppointmentRepository;
-use App\CustomerManagement\Customer\CustomerRepository;
-use App\Invoice\InvoiceRepository;
-use App\Models\Animal\Animal;
-use App\Models\Appointment\Appointment;
-use App\Models\Customer\Customer;
-use App\Models\Invoice\Invoice;
-use DB;
+
+use App\Services\Measurement\Measurement;
+use App\Services\Measurement\MeasurementRepository;
+use Carbon\Carbon;
 use Laravel\Lumen\Testing\DatabaseTransactions;
-use Tests\App\CustomerManagement\Animals\AnimalRepositoryMock;
-use Tests\App\CustomerManagement\Appointment\AppointmentRepositoryMock;
-use Tests\App\CustomerManagement\Customer\CustomerRepositoryMock;
-use Tests\App\Invoice\InvoiceRepositoryMock;
 use Tests\TestCase;
 
 /**
@@ -27,10 +18,30 @@ abstract class IntegrationTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        \Cache::flush();
     }
 
     public function tearDown()
     {
+        \Cache::flush();
         parent::tearDown();
+    }
+
+    /**
+     * Creates a new saved Measurement
+     *
+     * @param Carbon $time
+     * @param float $value
+     * @return Measurement
+     */
+    protected function measure(Carbon $time, float $value) : Measurement
+    {
+        $measurement = new Measurement(['value' => $value]);
+        $measurement->created_at = $time;
+
+        $repository = new MeasurementRepository();
+        $repository->save($measurement);
+
+        return $measurement;
     }
 }

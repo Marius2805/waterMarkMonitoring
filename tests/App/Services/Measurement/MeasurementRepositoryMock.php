@@ -1,8 +1,11 @@
 <?php
 namespace Tests\App\Services\Measurement;
 
+use App\General\EntityRepository;
 use App\Services\Measurement\Measurement;
+use App\Services\Measurement\MeasurementNotFound;
 use App\Services\Measurement\MeasurementRepository;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Tests\App\General\EntityRepositoryMock;
 
@@ -17,9 +20,40 @@ class MeasurementRepositoryMock extends EntityRepositoryMock
      */
     private $savedEntity;
 
-    protected function getRepositoryClassName() : string
+    /**
+     * @return EntityRepository
+     */
+    public function getRepository() : EntityRepository
     {
-        return MeasurementRepository::class;
+        /** @var \PHPUnit_Framework_MockObject_MockObject $repository */
+        $repository = parent::getRepository();
+
+        $repository->method('getDailyAverage')
+            ->will(self::returnCallback([$this, 'getDailyAverageCallback']));
+
+        return $repository;
+    }
+
+    /**
+     * @param Carbon $time
+     * @return float
+     * @throws MeasurementNotFound
+     */
+    public function getDailyAverageCallback(Carbon $time) : float
+    {
+        switch ($time->diffInDays(Carbon::now())) {
+            case 0:
+                return 10;
+                break;
+            case 1:
+                return 10;
+                break;
+            case 3:
+                return 20;
+                break;
+            default:
+                throw new MeasurementNotFound('Average not found in mock!');
+        }
     }
 
     public function saveEntity(Model $entity)
@@ -31,5 +65,10 @@ class MeasurementRepositoryMock extends EntityRepositoryMock
     public function getByIdCallback(int $id)
     {
         return $this->savedEntity ?: new Measurement();
+    }
+
+    protected function getRepositoryClassName() : string
+    {
+        return MeasurementRepository::class;
     }
 }

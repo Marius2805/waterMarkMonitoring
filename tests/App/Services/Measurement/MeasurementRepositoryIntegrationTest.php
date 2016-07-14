@@ -68,11 +68,4 @@ class MeasurementRepositoryIntegrationTest extends EntityRepositoryTestCase
 
         return $measurement;
     }
-
-    private function measure(Carbon $time, float $value)
-    {
-        $measurement = new Measurement(['value' => $value]);
-        $measurement->created_at = $time;
-        $this->repository->save($measurement);
-    }
 }

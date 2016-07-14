@@ -1,6 +1,7 @@
 <?php
 namespace App\General;
 
+use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Model;
 
@@ -131,10 +132,10 @@ abstract class EntityRepository
     }
 
     /**
-     * @return DatabaseManager
+     * @return Connection
      */
-    protected function getConnection() : DatabaseManager
+    protected function getConnection() : Connection
     {
-        return app('db');
+        return app('db')->connection();
     }
 }
