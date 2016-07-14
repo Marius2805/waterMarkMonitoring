@@ -21,6 +21,7 @@ class MeasurementRepositoryIntegrationTest extends EntityRepositoryTestCase
 
     public function test_getDailyAverage_calculatedCorrectly()
     {
+        $this->measure(Carbon::yesterday(), 100);
         $this->measure(Carbon::now(), 0);
         $this->measure(Carbon::now(), 5);
 
@@ -71,6 +72,7 @@ class MeasurementRepositoryIntegrationTest extends EntityRepositoryTestCase
     private function measure(Carbon $time, float $value)
     {
         $measurement = new Measurement(['value' => $value]);
+        $measurement->created_at = $time;
         $this->repository->save($measurement);
     }
 }
