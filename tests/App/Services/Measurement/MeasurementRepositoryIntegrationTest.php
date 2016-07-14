@@ -30,7 +30,7 @@ class MeasurementRepositoryIntegrationTest extends EntityRepositoryTestCase
 
     /**
      * @expectedException \App\Services\Measurement\MeasurementNotFound
-     * @expectedExceptionMessage No measurements found at day "2016-07-13".
+     * @expectedExceptionMessage No measurements found at day
      */
     public function test_getDailyAverage_noRecords()
     {
