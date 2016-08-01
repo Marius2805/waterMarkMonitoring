@@ -1,8 +1,9 @@
 @include('header')
 <body>
     <script>
+        var app;
         $( document ).ready(function() {
-            var app = new Application();
+            app = new Application();
             app.dailyAverageController.renderChart();
         });
     </script>

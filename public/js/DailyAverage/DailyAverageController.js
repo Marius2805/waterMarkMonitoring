@@ -6,13 +6,17 @@ function DailyAverageController()
 
 DailyAverageController.prototype.renderChart = function()
 {
-    this.lineChart.addData('01.01.2015', 10);
-    this.lineChart.addData('02.01.2015', 15);
-    this.lineChart.addData('03.01.2015', 12);
-    this.lineChart.addData('04.01.2015', 12);
-    this.lineChart.addData('05.01.2015', 20);
-    this.lineChart.addData('06.01.2015', 22);
-    this.lineChart.addData('07.01.2015', 21);
-    this.lineChart.render();
-    this.segment.removeClass('loading');
+    $.ajax({
+        type: 'GET',
+        url: '/api/daily-average',
+        success: function (data) {
+            $.each(data, function (key, value) {
+                var date = moment(value.date);
+                app.dailyAverageController.lineChart.addData(date.format('DD.MM'), value.value);
+
+                app.dailyAverageController.lineChart.render();
+                app.dailyAverageController.segment.removeClass('loading');
+            })
+        }
+    });
 };

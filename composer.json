@@ -1,11 +1,10 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
+    "name": "marius2805/watermark-monitoring",
+    "description": "Micro application for monitoring distance measurements.",
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.0",
         "laravel/lumen-framework": "5.2.*",
         "vlucas/phpdotenv": "~2.2",
         "barryvdh/laravel-ide-helper": "^2.2",
