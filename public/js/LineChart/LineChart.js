@@ -7,6 +7,9 @@ function LineChart(canvasId)
         datasets: [
             {
                 label: "Tagesdurchschnitt",
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                pointBorderColor: "rgba(75,192,192,1)",
                 data: []
             }
         ]
