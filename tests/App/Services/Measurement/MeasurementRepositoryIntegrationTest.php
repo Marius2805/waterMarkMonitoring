@@ -38,6 +38,26 @@ class MeasurementRepositoryIntegrationTest extends EntityRepositoryTestCase
         $this->repository->getDailyAverage(Carbon::now());
     }
 
+    public function test_getHourlyAverage_calculatedCorrectly()
+    {
+        $this->measure(Carbon::now()->subHours(1), 100);
+        $this->measure(Carbon::now(), 0);
+        $this->measure(Carbon::now(), 5);
+
+        $result = $this->repository->getHourlyAverage(Carbon::now());
+        self::assertEquals(2.5, $result);
+    }
+
+    /**
+     * @expectedException \App\Services\Measurement\MeasurementNotFound
+     * @expectedExceptionMessage No measurements found at hour
+     */
+    public function test_getHourlyAverage_noRecords()
+    {
+        $this->repository->getHourlyAverage(Carbon::now());
+    }
+
+
     /**
      * @return EntityRepository
      */

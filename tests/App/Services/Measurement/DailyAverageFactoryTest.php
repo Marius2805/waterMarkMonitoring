@@ -1,60 +1,29 @@
 <?php
 namespace Tests\App\Services\Measurement;
 
+use App\Services\Measurement\AverageFactory;
 use App\Services\Measurement\DailyAverage;
 use App\Services\Measurement\DailyAverageFactory;
-use Carbon\Carbon;
-use Tests\App\General\IntegrationTest;
 
 /**
  * Class DailyAverageFactoryIntegrationTest
  * @package Tests\App\Services\Measurement
  */
-class DailyAverageFactoryTest extends IntegrationTest
+class DailyAverageFactoryTest extends AverageFactoryTest
 {
-    /**
-     * @var DailyAverageFactory
-     */
-    private $factory;
-
-    public function setUp()
+    protected function createFactory() : AverageFactory
     {
-        parent::setUp();
-
         $repositoryMock = new MeasurementRepositoryMock();
-        $this->factory = new DailyAverageFactory($repositoryMock->getRepository(), false);
+        return new DailyAverageFactory($repositoryMock->getRepository(), false);
     }
 
-    public function test_getAverages_allAveragesFound()
+    protected function getExpectedAverageStep() : int
     {
-        $results = $this->factory->getAverages(2);
-
-        self::assertCount(2, $results);
-        foreach ($results as $i => $result) {
-            self::assertInstanceOf(DailyAverage::class, $result);
-            self::assertEquals(10, $result->getValue());
-            self::assertEquals(Carbon::today()->subDays($i), $result->getDate());
-        }
+        return 1440;
     }
 
-    public function test_getAverages_gapsIgnored()
+    protected function getExpectedAverageClass() : string
     {
-        $results = $this->factory->getAverages(3);
-
-        self::assertCount(3, $results);
-        self::assertEquals(Carbon::today()->subDays(3), last($results)->getDate());
-        self::assertEquals(20, last($results)->getValue());
-    }
-
-    public function test_getAverages_maxLimitReachedBecauseOfGaps()
-    {
-        $results = $this->factory->getAverages(DailyAverageFactory::MAX_LIMIT - 1);
-        self::assertLessThan(DailyAverageFactory::MAX_LIMIT, count($results));
-    }
-
-    public function test_getAverages_limitExceedsMaxLimit()
-    {
-        $results = $this->factory->getAverages(1000000);
-        self::assertLessThan(DailyAverageFactory::MAX_LIMIT + 1, count($results));
+        return DailyAverage::class;
     }
 }

@@ -5,6 +5,7 @@
         $( document ).ready(function() {
             app = new Application();
             app.dailyAverageController.renderChart();
+            app.hourlyAverageController.renderChart();
         });
     </script>
     <div class="page">
@@ -23,7 +24,8 @@
         <div class="ui one column grid">
             <div class="column">
                 <div class="segment ui">
-                    <h3 class="icon header"><i class="time icon"></i>Heute</h3>
+                    <h3 class="icon header"><i class="time icon" id="hourlyAverageSegment"></i>Heute</h3>
+                    <canvas id="hourlyAverageChart" width="700" height="260"></canvas>
                 </div>
             </div>
             <div class="column">

@@ -31,7 +31,32 @@ class MeasurementRepositoryMock extends EntityRepositoryMock
         $repository->method('getDailyAverage')
             ->will(self::returnCallback([$this, 'getDailyAverageCallback']));
 
+        $repository->method('getHourlyAverage')
+            ->will(self::returnCallback([$this, 'getHourlyAverageCallback']));
+
         return $repository;
+    }
+
+    /**
+     * @param Carbon $time
+     * @return float
+     * @throws MeasurementNotFound
+     */
+    public function getHourlyAverageCallback(Carbon $time) : float
+    {
+        switch ($time->diffInHours(Carbon::now())) {
+            case 0:
+                return 10;
+                break;
+            case 1:
+                return 10;
+                break;
+            case 3:
+                return 20;
+                break;
+            default:
+                throw new MeasurementNotFound('Average not found in mock!');
+        }
     }
 
     /**

@@ -39,4 +39,23 @@ class MeasurementRepository extends EntityRepository
 
         return $result;
     }
+
+    /**
+     * @param Carbon $hour
+     * @return float
+     * @throws MeasurementNotFound
+     */
+    public function getHourlyAverage(Carbon $hour) : float
+    {
+        $start = (clone $hour)->minute(0)->second(0);
+        $end   = (clone $hour)->minute(59)->second(59);
+
+        $result = $this->getConnection()->table($this->getTable())->whereBetween('created_at', [$start, $end])->avg('value');
+
+        if (is_null($result)) {
+            throw new MeasurementNotFound('No measurements found at hour "' . $start->toTimeString() . '".');
+        }
+
+        return $result;
+    }
 }

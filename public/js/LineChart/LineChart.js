@@ -1,4 +1,4 @@
-function LineChart(canvasId)
+function LineChart(canvasId, label)
 {
     this.canvasId = canvasId;
 
@@ -6,10 +6,9 @@ function LineChart(canvasId)
         labels: [],
         datasets: [
             {
-                label: "Tagesdurchschnitt",
-                backgroundColor: "rgba(75,192,192,0.4)",
-                borderColor: "rgba(75,192,192,1)",
-                pointBorderColor: "rgba(75,192,192,1)",
+                label: label,
+                borderColor: "rgba(47, 47, 50, 0.4)",
+                pointBorderColor: "rgba(47, 47, 50, 0.6)",
                 data: []
             }
         ]

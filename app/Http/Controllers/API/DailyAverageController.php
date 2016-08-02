@@ -1,42 +1,30 @@
 <?php
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Services\Measurement\DailyAverageFactory;
-use Assert\Assertion;
-use Illuminate\Http\Request;
 
 /**
  * Class DailyAverageController
  * @package App\Http\Controllers\API
  */
-class DailyAverageController extends Controller
+class DailyAverageController extends AverageController
 {
-    const DEFAULT_LIMIT = 7;
-
-    /**
-     * @var DailyAverageFactory
-     */
-    private $factory;
-
     /**
      * DailyAverageController constructor.
+     *
      * @param DailyAverageFactory $factory
      */
     public function __construct(DailyAverageFactory $factory = null)
     {
-        $this->factory = $factory ?: new DailyAverageFactory();
+        $factory = $factory ?: new DailyAverageFactory();
+        parent::__construct($factory);
     }
 
     /**
-     * @param Request $request
-     * @return array
+     * @return int
      */
-    public function get(Request $request) : array
+    public function getDefaultLimit() : int
     {
-        $limit = $request->get('limit') ?: self::DEFAULT_LIMIT;
-        Assertion::integer($limit);
-
-        return $this->factory->getAverages($limit);
+        return 7;
     }
 }
