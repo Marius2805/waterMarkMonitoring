@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\Measurement;
+namespace App\Services\Measurement\Statistics;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Jsonable;

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\API;
 
-use App\Services\Measurement\DailyAverageFactory;
+use App\Services\Measurement\Statistics\DailyAverageFactory;
 
 /**
  * Class DailyAverageController

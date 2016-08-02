@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\Measurement;
+namespace App\Services\Measurement\Statistics;
 
 /**
  * Class HourlyAverage

@@ -1,6 +1,7 @@
 <?php
-namespace App\Services\Measurement;
+namespace App\Services\Measurement\Statistics;
 
+use App\Services\Measurement\MeasurementRepository;
 use Carbon\Carbon;
 
 /**

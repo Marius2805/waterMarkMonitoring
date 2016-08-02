@@ -2,7 +2,7 @@
 namespace Tests\App\Http\Controllers\API;
 
 use App\Http\Controllers\API\AverageController;
-use App\Services\Measurement\Average;
+use App\Services\Measurement\Statistics\Average;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 

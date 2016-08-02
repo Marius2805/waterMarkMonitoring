@@ -1,9 +1,9 @@
 <?php
 namespace Tests\App\Services\Measurement;
 
-use App\Services\Measurement\AverageFactory;
-use App\Services\Measurement\DailyAverage;
-use App\Services\Measurement\DailyAverageFactory;
+use App\Services\Measurement\Statistics\AverageFactory;
+use App\Services\Measurement\Statistics\DailyAverage;
+use App\Services\Measurement\Statistics\DailyAverageFactory;
 
 /**
  * Class DailyAverageFactoryIntegrationTest

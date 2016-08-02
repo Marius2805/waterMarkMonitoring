@@ -1,7 +1,7 @@
 <?php
 namespace Tests\App\Services\Measurement;
 
-use App\Services\Measurement\AverageFactory;
+use App\Services\Measurement\Statistics\AverageFactory;
 use Tests\App\General\IntegrationTest;
 
 /**

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Services\Measurement\AverageFactory;
+use App\Services\Measurement\Statistics\AverageFactory;
 use Assert\Assertion;
 use Illuminate\Http\Request;
 

@@ -30,7 +30,7 @@ class MeasurementRepositoryIntegrationTest extends EntityRepositoryTestCase
     }
 
     /**
-     * @expectedException \App\Services\Measurement\MeasurementNotFound
+     * @expectedException \App\Services\Measurement\Statistics\MeasurementNotFound
      * @expectedExceptionMessage No measurements found at day
      */
     public function test_getDailyAverage_noRecords()
@@ -49,7 +49,7 @@ class MeasurementRepositoryIntegrationTest extends EntityRepositoryTestCase
     }
 
     /**
-     * @expectedException \App\Services\Measurement\MeasurementNotFound
+     * @expectedException \App\Services\Measurement\Statistics\MeasurementNotFound
      * @expectedExceptionMessage No measurements found at hour
      */
     public function test_getHourlyAverage_noRecords()

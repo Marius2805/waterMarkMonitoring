@@ -2,6 +2,7 @@
 namespace App\Services\Measurement;
 
 use App\General\EntityRepository;
+use App\Services\Measurement\Statistics\MeasurementNotFound;
 use Carbon\Carbon;
 
 /**

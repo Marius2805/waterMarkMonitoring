@@ -1,7 +1,7 @@
 <?php
 namespace Tests\App\Services\Measurement;
 
-use App\Services\Measurement\DailyAverageFactory;
+use App\Services\Measurement\Statistics\DailyAverageFactory;
 use App\Services\Measurement\MeasurementRepository;
 use Carbon\Carbon;
 use Tests\App\General\IntegrationTest;

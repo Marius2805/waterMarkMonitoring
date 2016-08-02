@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\API;
 
-use App\Services\Measurement\HourlyAverageFactory;
+use App\Services\Measurement\Statistics\HourlyAverageFactory;
 
 /**
  * Class HourlyAverageController

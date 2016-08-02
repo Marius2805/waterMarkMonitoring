@@ -3,7 +3,7 @@ namespace Tests\App\Services\Measurement;
 
 use App\General\EntityRepository;
 use App\Services\Measurement\Measurement;
-use App\Services\Measurement\MeasurementNotFound;
+use App\Services\Measurement\Statistics\MeasurementNotFound;
 use App\Services\Measurement\MeasurementRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;

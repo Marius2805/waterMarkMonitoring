@@ -1,9 +1,9 @@
 <?php
 namespace Tests\App\Services\Measurement;
 
-use App\Services\Measurement\AverageFactory;
-use App\Services\Measurement\HourlyAverage;
-use App\Services\Measurement\HourlyAverageFactory;
+use App\Services\Measurement\Statistics\AverageFactory;
+use App\Services\Measurement\Statistics\HourlyAverage;
+use App\Services\Measurement\Statistics\HourlyAverageFactory;
 
 /**
  * Class HourlyAverageFactoryTest

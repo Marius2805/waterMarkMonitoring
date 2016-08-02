@@ -1,22 +1,22 @@
 <?php
-namespace App\Services\Measurement;
+namespace App\Services\Measurement\Statistics;
 
 use Carbon\Carbon;
 
 /**
- * Class DailyAverageFactory
+ * Class HourlyAverageFactory
  * @package App\Services\Measurement
  */
-class DailyAverageFactory extends AverageFactory
+class HourlyAverageFactory extends AverageFactory
 {
-    const MAX_LIMIT = 20;
+    const MAX_LIMIT = 24;
 
     /**
      * @inheritdoc
      */
     protected function createAverage(Carbon $date) : Average
     {
-        return new DailyAverage(clone $date, $this->repository->getDailyAverage($date));
+        return new HourlyAverage(clone $date, $this->repository->getHourlyAverage($date));
     }
 
     /**
@@ -24,7 +24,7 @@ class DailyAverageFactory extends AverageFactory
      */
     protected function getUniqueDateFormat() : string
     {
-        return 'Y-m-d';
+        return 'Y-m-d-H';
     }
 
     /**
@@ -40,7 +40,7 @@ class DailyAverageFactory extends AverageFactory
      */
     protected function getStepSize() : \DateInterval
     {
-        return new \DateInterval('P1D');
+        return new \DateInterval('PT1H');
     }
 
     /**
@@ -48,6 +48,6 @@ class DailyAverageFactory extends AverageFactory
      */
     public function getStartDate() : Carbon
     {
-        return Carbon::today();
+        return Carbon::now()->minute(0)->second(0);
     }
 }
