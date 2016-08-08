@@ -54,7 +54,8 @@ class MeasurementRatingService
     {
         $setting = $this->settingsRepository->get(SettingsRepository::MEASUREMENT_GAP_WARNING_THRESHOLD);
         $lastMeasurement = $this->measurementsRepository->getLastMeasurement();
+        $gapInMinutes = Carbon::now()->diffInMinutes($lastMeasurement->created_at);
 
-        return Carbon::now()->diffInMinutes($lastMeasurement->created_at) >= $setting->value;
+        return is_null($lastMeasurement) || $gapInMinutes >= $setting->value;
     }
 }

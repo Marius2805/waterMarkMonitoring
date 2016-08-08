@@ -12,8 +12,18 @@
         <h1 class="ui header">
             <img class="image" id="header-icon" src="/images/waterDrop.svg">{{env('PAGE_TITLE', 'Watermark monitoring')}}
         </h1>
-        <div class="ui green icon message">
-            <i class="checkmark icon"></i>
+        @if($gapWarning)
+            <div class="ui orange icon message">
+                <i class="warning icon"></i>
+                <div class="content">
+                    <div class="header">
+                        Die letzte Messung fand vor mehr als {{$gapWarningLimit}} Minuten statt!
+                    </div>
+                </div>
+            </div>
+        @endif
+        <div class="ui {{$waterMarkWarning ? 'red' : 'green'}} icon message">
+            <i class="{{$waterMarkWarning ? 'warning' : 'checkmark'}} icon"></i>
             <div class="content">
                 <div class="header">
                     Der aktuelle Wassertand beträgt {{$lastMeasurementValue}} cm
