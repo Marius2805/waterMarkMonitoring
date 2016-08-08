@@ -21,12 +21,16 @@ class MeasurementRepositoryMock extends EntityRepositoryMock
     private $savedEntity;
 
     /**
+     * @param Measurement $lastMeasurement
      * @return EntityRepository
      */
-    public function getRepository() : EntityRepository
+    public function getRepository(Measurement $lastMeasurement = null) : EntityRepository
     {
         /** @var \PHPUnit_Framework_MockObject_MockObject $repository */
         $repository = parent::getRepository();
+
+        $repository->method('getLastMeasurement')
+            ->will(self::returnCallback([$this, 'getLastMeasurementCallback']));
 
         $repository->method('getDailyAverage')
             ->will(self::returnCallback([$this, 'getDailyAverageCallback']));
@@ -35,6 +39,14 @@ class MeasurementRepositoryMock extends EntityRepositoryMock
             ->will(self::returnCallback([$this, 'getHourlyAverageCallback']));
 
         return $repository;
+    }
+
+    /**
+     * @return Measurement
+     */
+    public function getLastMeasurementCallback() : Measurement
+    {
+        return $this->savedEntity;
     }
 
     /**

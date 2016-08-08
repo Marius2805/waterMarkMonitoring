@@ -4,7 +4,7 @@ namespace Tests\App\Http\Controllers\API;
 use App\Http\Controllers\API\AverageController;
 use App\Http\Controllers\API\DailyAverageController;
 use App\Services\Measurement\Statistics\DailyAverage;
-use Tests\App\Services\Measurement\DailyAverageFactoryMock;
+use Tests\App\Services\Measurement\Statistics\DailyAverageFactoryMock;
 
 /**
  * Class DailyAverageControllerTest

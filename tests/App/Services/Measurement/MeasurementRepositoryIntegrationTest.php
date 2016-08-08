@@ -19,6 +19,16 @@ class MeasurementRepositoryIntegrationTest extends EntityRepositoryTestCase
      */
     protected $repository;
 
+    public function test_getLastMeasurement_lastReturned()
+    {
+        $this->measure(Carbon::now()->subSeconds(10), 100);
+        $this->measure(Carbon::now(), 200);
+
+        $result = $this->repository->getLastMeasurement();
+        self::assertInstanceOf(Measurement::class, $result);
+        self::assertEquals(200, $result->value);
+    }
+
     public function test_getDailyAverage_calculatedCorrectly()
     {
         $this->measure(Carbon::yesterday(), 100);

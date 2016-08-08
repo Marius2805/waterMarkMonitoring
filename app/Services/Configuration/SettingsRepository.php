@@ -7,7 +7,8 @@ namespace App\Services\Configuration;
  */
 class SettingsRepository
 {
-    const WATER_MARK_WARNING_THRESHOLD = 'waterMarkWarningThreshold';
+    const WATER_MARK_WARNING_THRESHOLD      = 'waterMarkWarningThreshold';
+    const MEASUREMENT_GAP_WARNING_THRESHOLD = 'gapWarningThreshold';
 
     /**
      * @param string $key

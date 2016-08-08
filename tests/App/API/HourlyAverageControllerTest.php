@@ -4,7 +4,7 @@ namespace Tests\App\Http\Controllers\API;
 use App\Http\Controllers\API\AverageController;
 use App\Http\Controllers\API\HourlyAverageController;
 use App\Services\Measurement\Statistics\HourlyAverage;
-use Tests\App\Services\Measurement\HourlyAverageFactoryMock;
+use Tests\App\Services\Measurement\Statistics\HourlyAverageFactoryMock;
 
 /**
  * Class HourlyAverageControllerTest

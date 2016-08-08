@@ -26,6 +26,14 @@ class MeasurementRepository extends EntityRepository
     }
 
     /**
+     * @return Measurement
+     */
+    public function getLastMeasurement()
+    {
+        return Measurement::orderBy('created_at', 'desc')->first();
+    }
+
+    /**
      * @param Carbon $day
      * @return float
      * @throws MeasurementNotFound
