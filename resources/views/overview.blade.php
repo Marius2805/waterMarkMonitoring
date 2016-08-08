@@ -16,11 +16,11 @@
             <i class="checkmark icon"></i>
             <div class="content">
                 <div class="header">
-                    Der aktuelle Wassertand beträgt 21.29 cm
+                    Der aktuelle Wassertand beträgt {{$lastMeasurementValue}} cm
                 </div>
-                <p>Die letzte Messung fand vor 10 Minuten statt</p>
+                <p>Die letzte Messung fand vor {{$lastMeasurementOffset}} Minuten statt</p>
             </div>
-        </div>
+        </div><br>
         <div class="ui one column grid">
             <div class="column">
                 <div class="segment ui">
