@@ -14,6 +14,17 @@ function LineChart(canvasId, label)
         ]
     };
 
+    this.options = {
+        scales: {
+            yAxes: [{
+                display: true,
+                ticks: {
+                    beginAtZero: true   // minimum value will be 0.
+                }
+            }]
+        }
+    };
+
     this.chart = undefined;
 }
 
@@ -28,6 +39,7 @@ LineChart.prototype.render = function ()
     var ctx = $("#" + this.canvasId);
     this.chart = new Chart(ctx, {
         type: 'line',
-        data: this.data
+        data: this.data,
+        options: this.options
     });
 };
