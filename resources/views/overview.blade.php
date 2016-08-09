@@ -17,7 +17,7 @@
                 <i class="warning icon"></i>
                 <div class="content">
                     <div class="header">
-                        Die letzte Messung fand vor mehr als {{$gapWarningLimit}} Minuten statt!
+                        {{str_replace('<VALUE>', $gapWarningLimit, $app['translator']->trans('overview.gapWarning'))}}
                     </div>
                 </div>
             </div>
@@ -26,9 +26,9 @@
             <i class="{{$waterMarkWarning ? 'warning' : 'checkmark'}} icon"></i>
             <div class="content">
                 <div class="header">
-                    Der aktuelle Wassertand beträgt {{$lastMeasurementValue}} cm
+                    {{str_replace('<VALUE>', $lastMeasurementValue, $app['translator']->trans('overview.currentValue'))}}
                 </div>
-                <p>Die letzte Messung fand vor {{$lastMeasurementOffset}} Minuten statt</p>
+                <p>{{str_replace('<VALUE>', $lastMeasurementOffset, $app['translator']->trans('overview.lastMeasurement'))}}</p>
             </div>
         </div><br>
         <div class="ui one column grid">
