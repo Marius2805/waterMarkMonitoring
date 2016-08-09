@@ -9,6 +9,8 @@ class SettingsRepository
 {
     const WATER_MARK_WARNING_THRESHOLD      = 'waterMarkWarningThreshold';
     const MEASUREMENT_GAP_WARNING_THRESHOLD = 'gapWarningThreshold';
+    const NOTIFICATION_REST_TIME            = 'notificationRestTime';
+    const LAST_NOTIFICATION                 = 'lastNotification';
 
     /**
      * @param string $key

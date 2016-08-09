@@ -4,6 +4,7 @@ namespace Tests\App\Services\Configuration;
 use App\Services\Configuration\Setting;
 use App\Services\Configuration\SettingNotFound;
 use App\Services\Configuration\SettingsRepository;
+use Carbon\Carbon;
 
 /**
  * Class SettingsRepositoryMock
@@ -12,12 +13,20 @@ use App\Services\Configuration\SettingsRepository;
 class SettingsRepositoryMock extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var Carbon
+     */
+    private $lastNotificationValue;
+
+    /**
      * @return SettingsRepository
      */
     public function getRepository() : SettingsRepository
     {
         $repository = $this->getMockBuilder(SettingsRepository::class)->getMock();
-        $repository->method('get')->will(self::returnCallback([$this, 'getCallback']));
+
+        $repository->method('get')
+            ->will(self::returnCallback([$this, 'getCallback']));
+        $repository->method('save')->willReturn(null);
 
         return $repository;
     }
@@ -34,8 +43,20 @@ class SettingsRepositoryMock extends \PHPUnit_Framework_TestCase
                 return new Setting(['settings_key' => $key, 'value' => 10]);
             case SettingsRepository::MEASUREMENT_GAP_WARNING_THRESHOLD:
                 return new Setting(['settings_key' => $key, 'value' => 180]);
+            case SettingsRepository::NOTIFICATION_REST_TIME:
+                return new Setting(['settings_key' => $key, 'value' => 360]);
+            case SettingsRepository::LAST_NOTIFICATION:
+                return new Setting(['settings_key' => $key, 'value' => $this->lastNotificationValue]);
             default:
                 throw new SettingNotFound($key, 'READ');
         }
+    }
+
+    /**
+     * @param Carbon $lastNotificationValue
+     */
+    public function setLastNotificationValue(Carbon $lastNotificationValue)
+    {
+        $this->lastNotificationValue = $lastNotificationValue;
     }
 }

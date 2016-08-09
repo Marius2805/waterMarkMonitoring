@@ -46,7 +46,13 @@ class MeasurementRepositoryMock extends EntityRepositoryMock
      */
     public function getLastMeasurementCallback() : Measurement
     {
-        return $this->savedEntity;
+        $lastMeasurement = $this->savedEntity;
+        if ($lastMeasurement == null) {
+            $lastMeasurement = new Measurement(['value' => 15]);
+            $lastMeasurement->created_at = Carbon::now()->subMinutes(30);
+        }
+
+        return $lastMeasurement;
     }
 
     /**

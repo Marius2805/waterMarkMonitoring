@@ -12,7 +12,7 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->string('settings_key', 64)->p;
-            $table->string('value', 128);
+            $table->text('value')->nullable();
             $table->primary('settings_key');
             $table->timestamps();
         });
